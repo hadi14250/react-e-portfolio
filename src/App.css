@@ -1,38 +1,67 @@
-.App {
-  text-align: center;
+.Enter-Button-Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Enter-Game-Button {
+    color: aliceblue;
+    background-color:rgb(17, 16, 50);
+    padding: 1.2rem 5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: relative;
+    border-width: 0;
+    border-radius: 0.36rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media (max-width: 767px) {
+    .Enter-Game-Button {
+        padding: 0.9rem 3rem;
+      font-size: 1.125rem;
+      border-width: 0;
+      border-radius: 0.27rem;
+    }
   }
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.Enter-Game-Button::after, .Enter-Game-Button::before {
+    --angle: 0deg;
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle), transparent 10%, #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    padding: 2px;
+    border-radius: 0.36rem;
+    animation: 3s spin linear infinite;
 }
 
-.App-link {
-  color: #61dafb;
+.Enter-Game-Button::before {
+    filter: blur(1rem);
+    opacity: 0.6;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* .Enter-Game-Button:hover::after, 
+.Enter-Game-Button:hover::before {
+    animation-direction: reverse;
+} */
+
+@keyframes spin {
+    from {
+        --angle: 0deg;
+    }
+    to {
+        --angle: 360deg;
+    }
 }
